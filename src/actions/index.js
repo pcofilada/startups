@@ -3,7 +3,7 @@ import axios from 'axios';
 export const FETCH_STARTUPS = 'FETCH_STARTUPS';
 export const CREATE_STARTUP = 'CREATE_STARTUP'
 
-const ROOT_URL = 'http://localhost:3000';
+const ROOT_URL = 'https://startups-api.herokuapp.com';
 
 export function fetchStartups() {
   const request = axios.get(`${ROOT_URL}/startups`);

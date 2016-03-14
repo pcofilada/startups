@@ -52,7 +52,7 @@ class StartupList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { startups: state.startups };
+  return { startups: state.startups.all };
 }
 
 export default connect(mapStateToProps, {fetchStartups})(StartupList);

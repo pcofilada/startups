@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_STARTUPS = 'FETCH_STARTUPS';
+export const CREATE_STARTUP = 'CREATE_STARTUP'
 
 const ROOT_URL = 'http://localhost:3000';
 
@@ -9,6 +10,15 @@ export function fetchStartups() {
 
   return {
     type: FETCH_STARTUPS,
+    payload: request
+  }
+}
+
+export function createStartup(props) {
+  const request = axios.post(`${ROOT_URL}/startups`, props);
+
+  return {
+    type: CREATE_STARTUP,
     payload: request
   }
 }

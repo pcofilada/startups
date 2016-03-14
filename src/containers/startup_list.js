@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStartups } from '../actions/index';
+import { Link } from 'react-router';
 
 class StartupList extends Component {
   componentWillMount() {
@@ -8,9 +9,9 @@ class StartupList extends Component {
   }
 
   renderList() {
-    return this.props.startups.map((startup) => {
+    return this.props.startups.map((startup, index) => {
       return (
-        <div className="column is-third" key={startup.id}>
+        <div className="column is-third" key={index}>
           <div className="card">
             <div className="card-image">
               <figure className="image is-4by3">
@@ -38,6 +39,9 @@ class StartupList extends Component {
     return (
       <section className="section">
         <div className="container">
+          <p className="control">
+            <Link to="startups/new" className="button is-primary">Add your startup!</Link>
+          </p>
           <div className="columns is-multiline">
             {this.renderList()}
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStartups } from '../actions/index';
+import { ROOT_URL, fetchStartups } from '../actions/index';
 import { Link } from 'react-router';
 
 class StartupList extends Component {
@@ -15,7 +15,7 @@ class StartupList extends Component {
           <div className="card">
             <div className="card-image">
               <figure className="image is-4by3">
-                <img src="http://placehold.it/300x225" alt="" />
+                <img src={ROOT_URL + startup.image} alt="" />
               </figure>
             </div>
             <div className="card-content">

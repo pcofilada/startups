@@ -12,7 +12,7 @@ class StartupList extends Component {
   renderList() {
     return this.props.startups.map((startup, index) => {
       return (
-        <div className="column is-third" key={index}>
+        <a href={startup.link} className="column is-third startup" target="_blank" key={index}>
           <div className="card">
             <div className="card-image">
               <figure className="image is-4by3">
@@ -31,7 +31,7 @@ class StartupList extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </a>
       )
     })
   }

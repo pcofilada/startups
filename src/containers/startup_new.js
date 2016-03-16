@@ -4,19 +4,31 @@ import { createStartup } from '../actions/index';
 import { Link } from 'react-router';
 
 class StartupNew extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { text: "" };
+
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+
   static contextTypes = {
     router: PropTypes.object
   };
 
   onSubmit(props) {
-    this.props.createStartup(props)
+    return this.props.createStartup(props)
       .then(() => {
         this.context.router.push('/');
       });
   }
 
+  onInputChange(event) {
+    this.setState({ text: event.target.value });
+  }
+
   render() {
-    const { fields: { name, link, description, country }, handleSubmit } = this.props;
+    const { fields: { name, link, description, country }, handleSubmit, submitting } = this.props;
 
     return (
       <section className="section">
@@ -26,21 +38,22 @@ class StartupNew extends Component {
               <h1 className="title">Submit Startup</h1>
               <p className="control">
                 <label className="label">Name</label>
-                <input className={`input ${name.touched && name.invalid ? 'is-danger' : ''}`} type="text" placeholder="Google" {...name}/>
+                <input className={`input ${name.touched && name.invalid ? 'is-danger' : ''}`} type="text" placeholder="Google" {...name} disabled={submitting} />
                 <small className="text-help">
                   {name.touched ? name.error : ''}
                 </small>
               </p>
               <p className="control">
                 <label className="label">Link</label>
-                <input className={`input ${link.touched && link.invalid ? 'is-danger' : ''}`} type="text" placeholder="http://google.com" {...link} />
+                <input className={`input ${link.touched && link.invalid ? 'is-danger' : ''}`} type="text" placeholder="http://google.com" {...link} disabled={submitting} />
                 <small className="text-help">
                   {link.touched ? link.error : ''}
                 </small>
               </p>
               <p className="control">
                 <label className="label">Short Description</label>
-                <input className={`input ${description.touched && description.invalid ? 'is-danger' : ''}`} type="text" placeholder="A search engine for the web." {...description} />
+                <input className={`input ${description.touched && description.invalid ? 'is-danger' : ''}`} type="text" placeholder="A search engine for the web." maxLength="140" {...description} onChange={this.onInputChange} value={this.state.text} disabled={submitting} />
+                <span className="remaining">{140 - this.state.text.length}</span>
                 <small className="text-help">
                   {description.touched ? description.error : ''}
                 </small>
@@ -48,7 +61,7 @@ class StartupNew extends Component {
               <p className="control">
                 <label className="label">Locality</label>
                 <span className="select">
-                  <select {...country} className={`${country.touched && country.invalid ? 'is-danger' : ''}`}>
+                  <select {...country} className={`${country.touched && country.invalid ? 'is-danger' : ''}`} disabled={submitting}>
                     <option>Select dropdown</option>
                     <option value="ph">PH</option>
                     <option value="my">MY</option>
@@ -60,7 +73,7 @@ class StartupNew extends Component {
                 </small>
               </p>
               <p className="control">
-                <button className="button is-primary">Submit</button>
+                <button className={`button is-primary ${submitting ? 'is-loading' : ''}`} disabled={submitting}>Submit</button>
               </p>
             </form>
           </div>

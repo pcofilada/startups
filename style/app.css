@@ -1,15 +1,16 @@
-html,
-body,
-#main,
-.main-content,
-.section,
-.container {
-  height: 100%;
+.section {
+  min-height: 100vh;
 }
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+}
+
+.remaining {
+  position: absolute;
+  top: 25px;
+  right: 5px;
+  color: #D2C7C7;
 }

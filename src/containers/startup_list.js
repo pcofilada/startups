@@ -39,10 +39,8 @@ class StartupList extends Component {
   render() {
     if (!this.props.startups) {
       return (
-        <section className="section">
-          <div className="container">
-            <Loader color="#26A65B" size="20px" margin="4px" className="loading" />
-          </div>
+        <section className="section loading">
+          <Loader color="#1fc8db" size="20px" margin="4px" />
         </section>
       );
     }

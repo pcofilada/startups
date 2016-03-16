@@ -1,0 +1,15 @@
+html,
+body,
+#main,
+.main-content,
+.section,
+.container {
+  height: 100%;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

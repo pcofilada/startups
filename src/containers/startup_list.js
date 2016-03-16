@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ROOT_URL, fetchStartups } from '../actions/index';
 import { Link } from 'react-router';
+import Loader from 'halogen/PulseLoader';
 
 class StartupList extends Component {
   componentWillMount() {
@@ -36,6 +37,16 @@ class StartupList extends Component {
   }
 
   render() {
+    if (!this.props.startups) {
+      return (
+        <section className="section">
+          <div className="container">
+            <Loader color="#26A65B" size="20px" margin="4px" className="loading" />
+          </div>
+        </section>
+      );
+    }
+
     return (
       <section className="section">
         <div className="container">

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createStartup } from '../actions/index';
 import { Link } from 'react-router';
+import countries from 'i18n-iso-countries';
 
 class StartupNew extends Component {
   constructor(props) {
@@ -29,6 +30,13 @@ class StartupNew extends Component {
 
   render() {
     const { fields: { name, link, description, country }, handleSubmit, submitting } = this.props;
+    const country_names = countries.getNames("en");
+    const country_options = [];
+
+    for (var key in country_names) {
+      console.log(key);
+      country_options.push(<option value={`${key}`}>{`${country_names[key]}`}</option>)
+    }
 
     return (
       <section className="section">
@@ -63,9 +71,7 @@ class StartupNew extends Component {
                 <span className="select">
                   <select {...country} className={`${country.touched && country.invalid ? 'is-danger' : ''}`} disabled={submitting}>
                     <option>Select dropdown</option>
-                    <option value="ph">PH</option>
-                    <option value="my">MY</option>
-                    <option value="sg">SG</option>
+                    {country_options}
                   </select>
                 </span>
                 <small className="text-help is-block">
